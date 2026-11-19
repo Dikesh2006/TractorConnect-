@@ -104,9 +104,9 @@ const Reports = () => {
 
       {/* Report Table */}
       <div className="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
+        <div className="table-responsive-wrapper">
           {activeTab === 'customers' && (
-            <table className="w-full text-xs text-left">
+            <table className="w-full text-xs text-left min-w-[720px]">
               <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 uppercase tracking-wider">
                 <tr>
                   <th className="py-3 px-4">Farmer Name</th>
@@ -139,7 +139,7 @@ const Reports = () => {
           )}
 
           {activeTab === 'villages' && (
-            <table className="w-full text-xs text-left">
+            <table className="w-full text-xs text-left min-w-[700px]">
               <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 uppercase tracking-wider">
                 <tr>
                   <th className="py-3 px-4">Village Name</th>
@@ -170,7 +170,7 @@ const Reports = () => {
           )}
 
           {activeTab === 'services' && (
-            <table className="w-full text-xs text-left">
+            <table className="w-full text-xs text-left min-w-[700px]">
               <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 uppercase tracking-wider">
                 <tr>
                   <th className="py-3 px-4">Farming Service</th>
@@ -197,7 +197,7 @@ const Reports = () => {
           )}
 
           {activeTab === 'datewise' && (
-            <table className="w-full text-xs text-left">
+            <table className="w-full text-xs text-left min-w-[700px]">
               <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 uppercase tracking-wider">
                 <tr>
                   <th className="py-3 px-4">Work Date</th>

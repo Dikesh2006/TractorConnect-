@@ -205,11 +205,11 @@ const NewBooking = () => {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8" noValidate>
         {/* Step 1: Select Service */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 flex items-center space-x-2">
-            <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-800 text-xs flex items-center justify-center font-bold">1</span>
+        <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-4">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center space-x-2">
+            <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-800 text-xs flex items-center justify-center font-bold flex-shrink-0">1</span>
             <span>Select Farming Service (सेवा चुनें) *</span>
           </h2>
 
@@ -220,7 +220,7 @@ const NewBooking = () => {
               <div className="sm:col-span-2">
                 <select
                   {...register('serviceId')}
-                  className="block w-full px-4 py-3 bg-white text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-sm font-medium"
+                  className="block w-full px-3.5 py-3 bg-white text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-base sm:text-sm font-medium"
                 >
                   {services.map((s) => (
                     <option key={s._id} value={s._id}>
@@ -234,9 +234,9 @@ const NewBooking = () => {
               </div>
 
               {selectedService && (
-                <div className="sm:col-span-2 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
+                <div className="sm:col-span-2 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
                   <p className="font-semibold text-slate-800">{selectedService.name}</p>
-                  <p>{selectedService.description}</p>
+                  <p className="leading-relaxed">{selectedService.description}</p>
                   <p className="text-brand-800 font-bold pt-1">
                     Rate: {formatINR(selectedService.currentPrice)} / {selectedService.pricingUnit}
                     {selectedService.minimumCharge > 0 && ` (Minimum billing: ${formatINR(selectedService.minimumCharge)})`}
@@ -248,13 +248,13 @@ const NewBooking = () => {
         </div>
 
         {/* Step 2: Quantity & Schedule */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
-          <h2 className="text-lg font-bold text-slate-900 flex items-center space-x-2">
-            <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-800 text-xs flex items-center justify-center font-bold">2</span>
+        <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-6">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center space-x-2">
+            <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-800 text-xs flex items-center justify-center font-bold flex-shrink-0">2</span>
             <span>Estimated Field Area & Work Schedule (मात्रा एवं तारीख) *</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             {/* Quantity */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
@@ -266,7 +266,7 @@ const NewBooking = () => {
                 min="0.5"
                 max="100"
                 {...register('estimatedQuantity')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-sm"
+                className="block w-full px-3.5 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-base sm:text-sm"
               />
               {errors.estimatedQuantity && (
                 <p className="mt-1 text-xs text-red-600">{errors.estimatedQuantity.message}</p>
@@ -282,7 +282,7 @@ const NewBooking = () => {
                 type="date"
                 min={new Date().toISOString().split('T')[0]}
                 {...register('requestedDate')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-sm"
+                className="block w-full px-3.5 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-base sm:text-sm"
               />
               {errors.requestedDate && (
                 <p className="mt-1 text-xs text-red-600">{errors.requestedDate.message}</p>
@@ -296,7 +296,7 @@ const NewBooking = () => {
               </label>
               <select
                 {...register('requestedTimeSlot')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-sm"
+                className="block w-full px-3.5 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-base sm:text-sm"
               >
                 <option value="morning">Morning (सुबह: 7 AM - 12 PM)</option>
                 <option value="afternoon">Afternoon (दोपहर: 12 PM - 4 PM)</option>
@@ -306,7 +306,7 @@ const NewBooking = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Crop Type (फसल का प्रकार - Optional)
@@ -315,7 +315,7 @@ const NewBooking = () => {
                 type="text"
                 placeholder="e.g. Wheat (गेहूँ), Soybean, Gram (चना)"
                 {...register('cropType')}
-                className="block w-full px-4 py-2 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-sm"
+                className="block w-full px-3.5 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-base sm:text-sm"
               />
             </div>
 
@@ -327,16 +327,16 @@ const NewBooking = () => {
                 type="text"
                 placeholder="e.g. Enter from west canal path"
                 {...register('customerNotes')}
-                className="block w-full px-4 py-2 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-sm"
+                className="block w-full px-3.5 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 text-base sm:text-sm"
               />
             </div>
           </div>
         </div>
 
         {/* Step 3: Interactive Field Map Location */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 flex items-center space-x-2">
-            <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-800 text-xs flex items-center justify-center font-bold">3</span>
+        <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-4">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center space-x-2">
+            <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-800 text-xs flex items-center justify-center font-bold flex-shrink-0">3</span>
             <span>Pin Field Location on Map (खेत का स्थान) *</span>
           </h2>
           <p className="text-xs text-slate-500">
@@ -357,13 +357,13 @@ const NewBooking = () => {
         </div>
 
         {/* Step 4: Transparent Cost Estimate & Submission */}
-        <div className="bg-brand-900 text-white rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
+        <div className="bg-brand-900 text-white rounded-3xl p-5 sm:p-6 lg:p-8 shadow-sm space-y-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-brand-800 pb-4">
             <div>
               <span className="text-xs text-brand-200 font-bold uppercase tracking-wider block">
                 Estimated Total (अनुमानित लागत)
               </span>
-              <div className="text-3xl font-extrabold mt-1">
+              <div className="text-2xl sm:text-3xl font-extrabold mt-1">
                 {formatINR(finalCost)}
               </div>
               <p className="text-xs text-brand-200 mt-0.5">
@@ -374,7 +374,7 @@ const NewBooking = () => {
 
             <div className="text-left sm:text-right text-xs text-brand-200 space-y-1">
               <p className="flex items-center space-x-1.5 sm:justify-end">
-                <ShieldCheck className="w-4 h-4 text-harvest-400" />
+                <ShieldCheck className="w-4 h-4 text-harvest-400 flex-shrink-0" />
                 <span>Pay only after work is completed</span>
               </p>
               <p>Free cancellation until tractor dispatches</p>
@@ -384,14 +384,14 @@ const NewBooking = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full flex items-center justify-center space-x-2 py-4 px-6 rounded-2xl bg-harvest-500 hover:bg-harvest-600 text-slate-950 font-extrabold text-base shadow-lg transition-all disabled:opacity-60 cursor-pointer"
+            className="w-full flex items-center justify-center space-x-2 py-3.5 sm:py-4 px-6 rounded-2xl bg-harvest-500 hover:bg-harvest-600 text-slate-950 font-extrabold text-sm sm:text-base shadow-lg transition-all disabled:opacity-60 cursor-pointer min-h-[48px]"
           >
             {isSubmitting ? (
               <span>Submitting Booking Request...</span>
             ) : (
               <>
                 <span>Confirm & Submit Booking Request (बुकिंग भेजें)</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 flex-shrink-0" />
               </>
             )}
           </button>

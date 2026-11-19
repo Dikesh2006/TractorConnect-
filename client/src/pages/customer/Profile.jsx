@@ -96,19 +96,19 @@ const Profile = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-slate-900">Farmer Profile & Settings</h1>
-        <p className="text-sm text-slate-600">
+        <p className="text-xs sm:text-sm text-slate-600 mt-1">
           खाता जानकारी / Manage your personal contact details, location, and account password
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-200 mb-6 space-x-4">
+      <div className="flex border-b border-slate-200 mb-6 space-x-2 sm:space-x-4">
         <button
           onClick={() => setActiveTab('details')}
-          className={`pb-3 px-2 text-sm font-semibold border-b-2 flex items-center space-x-2 ${
+          className={`pb-3 px-2 text-xs sm:text-sm font-semibold border-b-2 flex items-center space-x-2 ${
             activeTab === 'details'
               ? 'border-brand-700 text-brand-700'
               : 'border-transparent text-slate-500 hover:text-slate-700'
@@ -119,7 +119,7 @@ const Profile = () => {
         </button>
         <button
           onClick={() => setActiveTab('password')}
-          className={`pb-3 px-2 text-sm font-semibold border-b-2 flex items-center space-x-2 ${
+          className={`pb-3 px-2 text-xs sm:text-sm font-semibold border-b-2 flex items-center space-x-2 ${
             activeTab === 'password'
               ? 'border-brand-700 text-brand-700'
               : 'border-transparent text-slate-500 hover:text-slate-700'
@@ -131,43 +131,43 @@ const Profile = () => {
       </div>
 
       {activeTab === 'details' && (
-        <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xs border border-slate-200">
           {profileSuccess && (
-            <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center space-x-3 text-emerald-800 text-sm">
+            <div className="mb-6 p-3 sm:p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center space-x-3 text-emerald-800 text-xs sm:text-sm">
               <CheckCircle className="w-5 h-5 flex-shrink-0 text-emerald-600" />
               <span>{profileSuccess}</span>
             </div>
           )}
           {profileError && (
-            <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-center space-x-3 text-red-800 text-sm">
+            <div className="mb-6 p-3 sm:p-4 rounded-xl bg-red-50 border border-red-200 flex items-center space-x-3 text-red-800 text-xs sm:text-sm">
               <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-600" />
               <span>{profileError}</span>
             </div>
           )}
 
-          <form onSubmit={handleProfileSubmit(onUpdateProfile)} className="space-y-5">
+          <form onSubmit={handleProfileSubmit(onUpdateProfile)} className="space-y-4 sm:space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1">Mobile Number</label>
+              <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">Mobile Number</label>
               <input
                 type="text"
                 disabled
                 value={`+91 ${user?.mobile || ''}`}
-                className="block w-full px-4 py-2.5 bg-slate-100 text-slate-500 rounded-xl border border-slate-200 text-sm cursor-not-allowed"
+                className="block w-full px-4 py-2.5 bg-slate-100 text-slate-500 rounded-xl border border-slate-200 text-base sm:text-sm cursor-not-allowed"
               />
-              <span className="text-xs text-slate-500 mt-1 block">
+              <span className="text-[11px] sm:text-xs text-slate-500 mt-1 block">
                 Mobile number is your account ID and cannot be changed directly.
               </span>
             </div>
 
             <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-1">
+              <label htmlFor="name" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                 Full Name *
               </label>
               <input
                 id="name"
                 type="text"
                 {...regProfile('name')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
               />
               {profileErrors.name && (
                 <p className="mt-1 text-xs text-red-600">{profileErrors.name.message}</p>
@@ -175,7 +175,7 @@ const Profile = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-1">
+              <label htmlFor="email" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                 Email Address (Optional)
               </label>
               <input
@@ -183,7 +183,7 @@ const Profile = () => {
                 type="email"
                 placeholder="ramesh@example.com"
                 {...regProfile('email')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
               />
               {profileErrors.email && (
                 <p className="mt-1 text-xs text-red-600">{profileErrors.email.message}</p>
@@ -192,14 +192,14 @@ const Profile = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="village" className="block text-sm font-semibold text-slate-700 mb-1">
+                <label htmlFor="village" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                   Village (गाँव) *
                 </label>
                 <input
                   id="village"
                   type="text"
                   {...regProfile('village')}
-                  className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                  className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
                 />
                 {profileErrors.village && (
                   <p className="mt-1 text-xs text-red-600">{profileErrors.village.message}</p>
@@ -207,14 +207,14 @@ const Profile = () => {
               </div>
 
               <div>
-                <label htmlFor="district" className="block text-sm font-semibold text-slate-700 mb-1">
+                <label htmlFor="district" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                   District (ज़िला) *
                 </label>
                 <input
                   id="district"
                   type="text"
                   {...regProfile('district')}
-                  className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                  className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
                 />
                 {profileErrors.district && (
                   <p className="mt-1 text-xs text-red-600">{profileErrors.district.message}</p>
@@ -223,14 +223,14 @@ const Profile = () => {
             </div>
 
             <div>
-              <label htmlFor="address" className="block text-sm font-semibold text-slate-700 mb-1">
+              <label htmlFor="address" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                 Full Address / Landmark
               </label>
               <textarea
                 id="address"
                 rows={2}
                 {...regProfile('address')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
                 placeholder="House no., street, or landmark"
               />
             </div>
@@ -238,7 +238,7 @@ const Profile = () => {
             <button
               type="submit"
               disabled={isProfileSubmitting}
-              className="inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-800 disabled:opacity-60 text-sm shadow-sm"
+              className="inline-flex items-center justify-center space-x-2 px-5 py-3 w-full sm:w-auto bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-800 disabled:opacity-60 text-sm shadow-xs cursor-pointer min-h-[44px]"
             >
               <Save className="w-4 h-4" />
               <span>{isProfileSubmitting ? 'Saving...' : 'Save Profile Changes'}</span>
@@ -248,15 +248,15 @@ const Profile = () => {
       )}
 
       {activeTab === 'password' && (
-        <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 max-w-md">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xs border border-slate-200 max-w-md">
           {passwordSuccess && (
-            <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center space-x-3 text-emerald-800 text-sm">
+            <div className="mb-6 p-3 sm:p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center space-x-3 text-emerald-800 text-xs sm:text-sm">
               <CheckCircle className="w-5 h-5 flex-shrink-0 text-emerald-600" />
               <span>{passwordSuccess}</span>
             </div>
           )}
           {passwordError && (
-            <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 flex items-center space-x-3 text-red-800 text-sm">
+            <div className="mb-6 p-3 sm:p-4 rounded-xl bg-red-50 border border-red-200 flex items-center space-x-3 text-red-800 text-xs sm:text-sm">
               <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-600" />
               <span>{passwordError}</span>
             </div>
@@ -264,13 +264,13 @@ const Profile = () => {
 
           <form onSubmit={handlePasswordSubmit(onChangePassword)} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1">
+              <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                 Current Password *
               </label>
               <input
                 type="password"
                 {...regPassword('currentPassword')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
               />
               {passwordErrors.currentPassword && (
                 <p className="mt-1 text-xs text-red-600">{passwordErrors.currentPassword.message}</p>
@@ -278,13 +278,13 @@ const Profile = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1">
+              <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                 New Password *
               </label>
               <input
                 type="password"
                 {...regPassword('newPassword')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
               />
               {passwordErrors.newPassword && (
                 <p className="mt-1 text-xs text-red-600">{passwordErrors.newPassword.message}</p>
@@ -292,13 +292,13 @@ const Profile = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1">
+              <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
                 Confirm New Password *
               </label>
               <input
                 type="password"
                 {...regPassword('confirmNewPassword')}
-                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"
+                className="block w-full px-4 py-2.5 text-slate-900 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-base sm:text-sm"
               />
               {passwordErrors.confirmNewPassword && (
                 <p className="mt-1 text-xs text-red-600">{passwordErrors.confirmNewPassword.message}</p>
@@ -308,7 +308,7 @@ const Profile = () => {
             <button
               type="submit"
               disabled={isPasswordSubmitting}
-              className="inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-800 disabled:opacity-60 text-sm shadow-sm mt-2"
+              className="inline-flex items-center justify-center space-x-2 px-5 py-3 w-full sm:w-auto bg-brand-700 text-white font-semibold rounded-xl hover:bg-brand-800 disabled:opacity-60 text-sm shadow-xs mt-2 cursor-pointer min-h-[44px]"
             >
               <KeyRound className="w-4 h-4" />
               <span>{isPasswordSubmitting ? 'Updating...' : 'Update Password'}</span>

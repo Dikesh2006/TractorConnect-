@@ -68,16 +68,22 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 overflow-y-auto">
-      <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 shadow-xl my-8">
-        <div className="flex justify-between items-start">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-3 sm:p-4 overflow-y-auto">
+      <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 max-w-lg w-full space-y-4 shadow-xl my-4 sm:my-8 max-h-[92vh] overflow-y-auto">
+        <div className="flex justify-between items-start gap-2">
           <div>
-            <h3 className="text-lg font-bold text-slate-900">Complete Field Work & Generate Bill</h3>
-            <p className="text-xs text-slate-500">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+              Complete Field Work & Generate Bill
+            </h3>
+            <p className="text-xs text-slate-500 mt-0.5">
               Customer: <strong>{booking.customer?.name}</strong> &bull; Service: {booking.service?.name}
             </p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg min-h-[36px] min-w-[36px] flex items-center justify-center"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -96,7 +102,7 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Actual Quantity ({booking.serviceSnapshot.pricingUnit}) *
@@ -105,7 +111,7 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="number"
                 step="0.1"
                 {...register('actualQuantity')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
               {errors.actualQuantity && <p className="text-[11px] text-red-600">{errors.actualQuantity.message}</p>}
             </div>
@@ -118,12 +124,12 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="number"
                 step="0.1"
                 {...register('actualAcres')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Working Hours
@@ -132,7 +138,7 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="number"
                 step="0.5"
                 {...register('workingHours')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
             </div>
 
@@ -144,13 +150,13 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="number"
                 step="1"
                 {...register('dieselUsedLiters')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
             </div>
           </div>
 
           {/* Discount & Extra Charges */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Discount (₹)
@@ -159,7 +165,7 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="number"
                 step="1"
                 {...register('discount')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
             </div>
 
@@ -171,12 +177,12 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="text"
                 placeholder="e.g. Loyal customer"
                 {...register('discountReason')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Extra Charges (₹)
@@ -185,7 +191,7 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="number"
                 step="1"
                 {...register('extraCharges')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
             </div>
 
@@ -197,7 +203,7 @@ const CompleteWorkModal = ({ booking, onClose, onSuccess }) => {
                 type="text"
                 placeholder="e.g. Rocky field clods"
                 {...register('extraChargesReason')}
-                className="w-full p-2.5 text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
+                className="w-full p-2.5 text-base sm:text-xs border border-slate-300 rounded-xl focus:ring-1 focus:ring-brand-500"
               />
             </div>
           </div>

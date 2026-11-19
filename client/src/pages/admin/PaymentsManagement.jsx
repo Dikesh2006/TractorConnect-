@@ -116,8 +116,8 @@ const PaymentsManagement = () => {
 
       {/* Payments Table */}
       <div className="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs text-left">
+        <div className="table-responsive-wrapper">
+          <table className="w-full text-xs text-left min-w-[680px]">
             <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200 uppercase tracking-wider">
               <tr>
                 <th className="py-3 px-4">Date & Time</th>

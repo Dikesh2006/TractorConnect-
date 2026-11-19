@@ -64,8 +64,8 @@ const OwnerLogin = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-140px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-100">
-      <div className="max-w-md w-full space-y-6 bg-white p-8 sm:p-10 rounded-2xl shadow-sm border border-slate-200">
+    <div className="min-h-[calc(100vh-140px)] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-slate-100">
+      <div className="max-w-md w-full space-y-6 bg-white p-5 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-slate-200">
         {/* Toggle between Farmer and Owner */}
         <div className="flex bg-slate-100 p-1 rounded-xl">
           <Link

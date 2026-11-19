@@ -82,11 +82,11 @@ const CustomerDashboard = () => {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs space-y-1">
           <div className="flex justify-between items-center text-slate-500 text-xs font-bold uppercase tracking-wider">
             <span>Recent Bookings</span>
-            <Calendar className="w-4 h-4 text-brand-700" />
+            <Calendar className="w-4 h-4 text-brand-700 flex-shrink-0" />
           </div>
           <span className="text-2xl font-extrabold text-slate-900 block">
             {bookings.length}
@@ -96,10 +96,10 @@ const CustomerDashboard = () => {
           </Link>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+        <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs space-y-1">
           <div className="flex justify-between items-center text-slate-500 text-xs font-bold uppercase tracking-wider">
             <span>Total Completed Jobs</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
           </div>
           <span className="text-2xl font-extrabold text-slate-900 block">
             {dues?.totalRecords || 0}
@@ -109,10 +109,10 @@ const CustomerDashboard = () => {
           </span>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+        <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs space-y-1 sm:col-span-2 lg:col-span-1">
           <div className="flex justify-between items-center text-slate-500 text-xs font-bold uppercase tracking-wider">
             <span>Outstanding Balance Due</span>
-            <Banknote className="w-4 h-4 text-amber-600" />
+            <Banknote className="w-4 h-4 text-amber-600 flex-shrink-0" />
           </div>
           <span className={`text-2xl font-extrabold block ${dues?.totalDue > 0 ? 'text-amber-700' : 'text-slate-900'}`}>
             {formatINR(dues?.totalDue || 0)}
@@ -124,7 +124,7 @@ const CustomerDashboard = () => {
       </div>
 
       {/* Recent Bookings List */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
+      <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-6">
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-xl font-bold text-slate-900">Recent Booking Requests</h2>

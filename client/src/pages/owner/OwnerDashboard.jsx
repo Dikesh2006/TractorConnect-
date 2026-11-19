@@ -102,14 +102,14 @@ const OwnerDashboard = () => {
       )}
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 min-[380px]:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Total Billed Revenue */}
         <div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-1">
           <div className="flex justify-between items-center text-slate-500">
             <span className="text-xs font-semibold">Total Revenue (कुल आय)</span>
             <Banknote className="w-4 h-4 text-emerald-600" />
           </div>
-          <p className="text-2xl font-extrabold text-slate-900">
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900">
             {formatIndianCurrency(totalRevenue)}
           </p>
           <p className="text-[10px] text-emerald-700 font-medium">
@@ -123,7 +123,7 @@ const OwnerDashboard = () => {
             <span className="text-xs font-semibold">Pending Dues (बाकी राशि)</span>
             <TrendingUp className="w-4 h-4 text-amber-600" />
           </div>
-          <p className="text-2xl font-extrabold text-amber-900">
+          <p className="text-xl sm:text-2xl font-extrabold text-amber-900">
             {formatIndianCurrency(totalDue)}
           </p>
           <p className="text-[10px] text-slate-500">
@@ -137,7 +137,7 @@ const OwnerDashboard = () => {
             <span className="text-xs font-semibold">Diesel Used (डीजल खपत)</span>
             <Fuel className="w-4 h-4 text-blue-600" />
           </div>
-          <p className="text-2xl font-extrabold text-slate-900">
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900">
             {totalFuel.toFixed(1)} <span className="text-sm font-normal text-slate-500">L</span>
           </p>
           <p className="text-[10px] text-slate-500">Recorded across completed jobs</p>
@@ -149,7 +149,7 @@ const OwnerDashboard = () => {
             <span className="text-xs font-semibold">Tractor Fleet (उपलब्ध)</span>
             <Truck className="w-4 h-4 text-brand-600" />
           </div>
-          <p className="text-2xl font-extrabold text-slate-900">
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900">
             {availableTractors} / {tractors.length}
           </p>
           <p className="text-[10px] text-emerald-700 font-medium">
@@ -187,7 +187,7 @@ const OwnerDashboard = () => {
           ) : (
             <div className="divide-y divide-slate-100">
               {recentBookings.map((b) => (
-                <div key={b._id} className="py-3 flex items-center justify-between gap-3 text-xs">
+                <div key={b._id} className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 text-xs">
                   <div>
                     <div className="font-bold text-slate-900 flex items-center space-x-1.5">
                       <span>{b.customer?.name || 'Farmer'}</span>
@@ -203,7 +203,7 @@ const OwnerDashboard = () => {
                     </p>
                   </div>
 
-                  <div className="text-right flex flex-col items-end space-y-1">
+                  <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start space-x-2 sm:space-x-0 space-y-0 sm:space-y-1">
                     <span
                       className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                         b.status === 'pending'

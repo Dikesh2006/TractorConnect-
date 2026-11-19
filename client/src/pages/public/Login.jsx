@@ -64,28 +64,28 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-140px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
-      <div className="max-w-md w-full space-y-6 bg-white p-8 sm:p-10 rounded-2xl shadow-sm border border-slate-200">
+    <div className="min-h-[calc(100vh-140px)] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      <div className="max-w-md w-full space-y-6 bg-white p-5 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-slate-200">
         {/* Toggle between Farmer and Owner */}
         <div className="flex bg-slate-100 p-1 rounded-xl">
-          <div className="flex-1 py-1.5 text-center text-xs font-bold rounded-lg bg-white text-brand-800 shadow-xs border border-brand-200">
+          <div className="flex-1 py-2 text-center text-xs font-bold rounded-lg bg-white text-brand-800 shadow-xs border border-brand-200">
             🌾 Farmer Login
           </div>
           <Link
             to="/owner/login"
-            className="flex-1 py-1.5 text-center text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-colors"
+            className="flex-1 py-2 text-center text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-colors"
           >
             🚜 Tractor Owner
           </Link>
         </div>
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-50 text-brand-700 mb-4 border border-brand-100 text-3xl shadow-sm">
+          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-brand-50 text-brand-700 mb-3 sm:mb-4 border border-brand-100 text-2xl sm:text-3xl shadow-sm">
             🚜
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
             Welcome to TractorConnect
           </h2>
-          <p className="mt-1 text-sm text-slate-600">
+          <p className="mt-1 text-xs sm:text-sm text-slate-600">
             लॉगिन करें / Log in with your 10-digit mobile number
           </p>
         </div>

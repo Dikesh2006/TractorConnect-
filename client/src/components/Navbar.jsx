@@ -260,134 +260,282 @@ const Navbar = () => {
 
           {/* Mobile menu toggle */}
           <div className="flex items-center md:hidden">
+            <a
+              href={`tel:+91${businessPhone}`}
+              className="mr-2 inline-flex items-center justify-center w-9 h-9 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200"
+              title="Call Helpline"
+            >
+              <Phone className="w-4 h-4 text-emerald-600" />
+            </a>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-slate-600 hover:text-slate-900 p-2 rounded-md"
+              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              className="text-slate-600 hover:text-slate-900 p-2.5 min-h-[44px] min-w-[44px] rounded-xl border border-slate-200 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Mobile Drawer Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 top-16 bg-slate-900/50 backdrop-blur-xs z-30 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-2 relative z-40 max-h-[calc(100vh-4rem)] overflow-y-auto shadow-xl animate-in slide-in-from-top-2 duration-150">
           <Link
             to="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-base font-medium text-slate-800"
+            className={`block py-2.5 px-3 rounded-xl text-sm font-semibold ${
+              isActivePath('/') ? 'bg-brand-50 text-brand-700' : 'text-slate-800 hover:bg-slate-50'
+            }`}
           >
             Home
           </Link>
           <Link
             to="/customer/find-tractors"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-base font-bold text-amber-800"
+            className={`block py-2.5 px-3 rounded-xl text-sm font-bold flex items-center space-x-1.5 ${
+              isActivePath('/customer/find-tractors')
+                ? 'bg-amber-100/70 text-amber-900'
+                : 'text-amber-800 bg-amber-50/70 hover:bg-amber-100'
+            }`}
           >
-            🔍 Find Tractor Owners (ट्रैक्टर खोजें)
+            <span>🔍 Find Tractor Owners (ट्रैक्टर खोजें)</span>
           </Link>
           <Link
             to="/services"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-base font-medium text-slate-800"
+            className={`block py-2.5 px-3 rounded-xl text-sm font-semibold ${
+              isActivePath('/services') ? 'bg-brand-50 text-brand-700' : 'text-slate-800 hover:bg-slate-50'
+            }`}
           >
             Farming Services (सेवाएं)
           </Link>
           <Link
             to="/about"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-base font-medium text-slate-800"
+            className={`block py-2.5 px-3 rounded-xl text-sm font-semibold ${
+              isActivePath('/about') ? 'bg-brand-50 text-brand-700' : 'text-slate-800 hover:bg-slate-50'
+            }`}
           >
             About Us
           </Link>
           <Link
             to="/contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-base font-medium text-slate-800"
+            className={`block py-2.5 px-3 rounded-xl text-sm font-semibold ${
+              isActivePath('/contact') ? 'bg-brand-50 text-brand-700' : 'text-slate-800 hover:bg-slate-50'
+            }`}
           >
             Contact
           </Link>
 
+          {/* Quick Call in Drawer */}
+          <a
+            href={`tel:+91${businessPhone}`}
+            className="flex items-center justify-center space-x-2 w-full py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold"
+          >
+            <Phone className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Call Helpline: +91 {businessPhone}</span>
+          </a>
+
           <div className="pt-2 border-t border-slate-100">
             {isAuthenticated ? (
-              <div className="space-y-2">
-                <div className="py-2">
-                  <p className="text-xs text-slate-500">Signed in as</p>
-                  <p className="text-sm font-semibold text-slate-800">{user?.name}</p>
+              <div className="space-y-1">
+                <div className="py-2 px-3 bg-slate-50 rounded-xl mb-2 flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Signed in as</p>
+                    <p className="text-sm font-bold text-slate-900 truncate">{user?.name}</p>
+                    <p className="text-xs text-slate-500">+91 {user?.mobile}</p>
+                  </div>
+                  {isAdmin ? (
+                    <span className="bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      Admin
+                    </span>
+                  ) : isOwner ? (
+                    <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      Owner
+                    </span>
+                  ) : (
+                    <span className="bg-brand-100 text-brand-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      Farmer
+                    </span>
+                  )}
                 </div>
+
                 {isAdmin ? (
-                  <Link
-                    to="/admin/dashboard"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-sm font-semibold text-amber-700"
-                  >
-                    Admin Dashboard
-                  </Link>
+                  <>
+                    <Link
+                      to="/admin/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-bold text-amber-700 hover:bg-amber-50"
+                    >
+                      Admin Dashboard
+                    </Link>
+                    <Link
+                      to="/admin/owners"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      🚜 Tractor Owners Management
+                    </Link>
+                    <Link
+                      to="/admin/bookings"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      All Bookings
+                    </Link>
+                    <Link
+                      to="/admin/services"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      Farming Services
+                    </Link>
+                    <Link
+                      to="/admin/reports"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      Reports & CSV
+                    </Link>
+                  </>
+                ) : isOwner ? (
+                  <>
+                    <Link
+                      to="/owner/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-bold text-amber-900 bg-amber-50"
+                    >
+                      🚜 Owner Dashboard
+                    </Link>
+                    <Link
+                      to="/owner/bookings"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      Booking Requests
+                    </Link>
+                    <Link
+                      to="/owner/services"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      My Services & Prices
+                    </Link>
+                    <Link
+                      to="/owner/tractors"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      My Tractor Fleet
+                    </Link>
+                    <Link
+                      to="/owner/work-records"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      Work Records & Billing
+                    </Link>
+                    <Link
+                      to="/owner/payments"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      Payments Received
+                    </Link>
+                    <Link
+                      to="/owner/reports"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                      Earnings & Reports
+                    </Link>
+                  </>
                 ) : (
                   <>
                     <Link
                       to="/customer/dashboard"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-sm font-medium text-brand-700"
+                      className="block py-2 px-3 rounded-lg text-xs font-bold text-brand-700 bg-brand-50"
                     >
                       Farmer Dashboard
                     </Link>
                     <Link
+                      to="/customer/find-tractors"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-amber-800 hover:bg-amber-50"
+                    >
+                      🔍 Find Nearby Tractors
+                    </Link>
+                    <Link
                       to="/customer/book"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-sm font-medium text-slate-700"
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
                     >
                       Book a Tractor
                     </Link>
                     <Link
                       to="/customer/my-bookings"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-sm font-medium text-slate-700"
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
                     >
                       My Bookings
                     </Link>
                     <Link
                       to="/customer/profile"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block py-2 text-sm font-medium text-slate-700"
+                      className="block py-2 px-3 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50"
                     >
                       Profile Settings
                     </Link>
                   </>
                 )}
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="w-full text-left py-2 text-sm font-semibold text-red-600"
-                >
-                  Log Out
-                </button>
+                <div className="border-t border-slate-100 pt-2 mt-2">
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="w-full text-left py-2.5 px-3 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg flex items-center space-x-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Log Out</span>
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="space-y-2 pt-2">
                 <Link
                   to="/owner/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block text-center w-full py-2.5 px-4 rounded-xl bg-amber-50 border border-amber-200 font-bold text-amber-900"
+                  className="block text-center w-full py-2.5 px-4 rounded-xl bg-amber-50 border border-amber-200 font-bold text-amber-900 text-xs"
                 >
                   🚜 Tractor Owner Portal
                 </Link>
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-center w-full py-2.5 px-4 rounded-xl border border-slate-300 font-semibold text-slate-700"
-                >
-                  Farmer Login
-                </Link>
-                <Link
-                  to="/register"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-center w-full py-2.5 px-4 rounded-xl bg-brand-700 font-semibold text-white shadow-xs"
-                >
-                  Register as Farmer
-                </Link>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block text-center py-2.5 px-3 rounded-xl border border-slate-300 font-semibold text-slate-700 text-xs hover:bg-slate-50"
+                  >
+                    Farmer Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block text-center py-2.5 px-3 rounded-xl bg-brand-700 font-semibold text-white text-xs shadow-xs hover:bg-brand-800"
+                  >
+                    Register
+                  </Link>
+                </div>
               </div>
             )}
           </div>

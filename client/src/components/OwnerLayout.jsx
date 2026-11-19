@@ -42,30 +42,39 @@ const OwnerLayout = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row">
       {/* Mobile Top Header */}
-      <div className="md:hidden bg-amber-900 text-white p-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
-        <div className="flex items-center space-x-2">
-          <span className="text-2xl">🚜</span>
-          <div>
-            <span className="font-bold text-sm block leading-none">
+      <div className="md:hidden bg-amber-900 text-white px-4 py-3.5 flex items-center justify-between sticky top-0 z-50 shadow-md">
+        <div className="flex items-center space-x-2 min-w-0 flex-1 mr-2">
+          <span className="text-2xl flex-shrink-0">🚜</span>
+          <div className="min-w-0">
+            <span className="font-bold text-sm block leading-tight truncate">
               {user?.businessName || 'Tractor Owner Portal'}
             </span>
-            <span className="text-[10px] text-amber-200">Owner Dashboard</span>
+            <span className="text-[10px] text-amber-200 block truncate">Owner Dashboard</span>
           </div>
         </div>
         <button
           type="button"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-1 rounded-md text-amber-200 hover:text-white"
+          aria-label={sidebarOpen ? 'Close Menu' : 'Open Menu'}
+          className="p-2 min-h-[44px] min-w-[44px] rounded-lg text-amber-200 hover:text-white flex items-center justify-center focus:outline-none"
         >
           {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
+      {/* Mobile Backdrop Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-35 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar for Desktop & Mobile Overlay */}
       <aside
         className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:static inset-y-0 left-0 z-40 w-64 bg-slate-900 text-slate-300 flex flex-col transition-transform duration-200 ease-in-out shadow-lg md:shadow-none`}
+        } md:translate-x-0 fixed md:static inset-y-0 left-0 z-40 w-64 bg-slate-900 text-slate-300 flex flex-col transition-transform duration-200 ease-in-out shadow-xl md:shadow-none`}
       >
         {/* Brand header */}
         <div className="h-20 px-5 flex items-center border-b border-slate-800 bg-slate-950/60">
@@ -142,7 +151,7 @@ const OwnerLayout = () => {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
+      <main className="flex-1 min-w-0 overflow-x-hidden p-3 sm:p-6 lg:p-8 space-y-6">
         {/* Pending Verification Notice Banner */}
         {isPendingApproval && (
           <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl flex items-start space-x-3 text-amber-900 shadow-xs">

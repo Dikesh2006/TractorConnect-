@@ -100,25 +100,25 @@ const OwnerReports = () => {
       )}
 
       {/* Financial KPIs */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-1">
           <p className="text-xs font-semibold text-slate-500">Gross Billed (कुल बिलिंग)</p>
-          <p className="text-2xl font-extrabold text-slate-900">{formatIndianCurrency(metrics?.totalRevenue || 0)}</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900">{formatIndianCurrency(metrics?.totalRevenue || 0)}</p>
         </div>
 
         <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 shadow-xs space-y-1">
           <p className="text-xs font-bold text-emerald-800">Cash/UPI Collected (वसूल)</p>
-          <p className="text-2xl font-extrabold text-emerald-900">{formatIndianCurrency(metrics?.totalPaid || 0)}</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-emerald-900">{formatIndianCurrency(metrics?.totalPaid || 0)}</p>
         </div>
 
         <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 shadow-xs space-y-1">
           <p className="text-xs font-bold text-amber-800">Market Dues (बाकी)</p>
-          <p className="text-2xl font-extrabold text-amber-900">{formatIndianCurrency(metrics?.totalDue || 0)}</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-amber-900">{formatIndianCurrency(metrics?.totalDue || 0)}</p>
         </div>
 
         <div className="p-4 bg-blue-50 rounded-2xl border border-blue-200 shadow-xs space-y-1">
           <p className="text-xs font-bold text-blue-800">Operational Profit (शुद्ध लाभ)</p>
-          <p className="text-2xl font-extrabold text-blue-900">{formatIndianCurrency(netRevenue)}</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-blue-900">{formatIndianCurrency(netRevenue)}</p>
         </div>
       </div>
 

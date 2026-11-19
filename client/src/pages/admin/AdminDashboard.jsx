@@ -84,17 +84,17 @@ const AdminDashboard = () => {
           </h1>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
           <Link
             to="/admin/bookings"
-            className="px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white rounded-xl text-xs font-bold shadow-xs flex items-center space-x-1.5"
+            className="px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white rounded-xl text-xs font-bold shadow-xs flex items-center justify-center space-x-1.5 flex-1 sm:flex-initial"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Manage All Bookings</span>
           </Link>
           <Link
             to="/admin/reports"
-            className="px-4 py-2 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-xl text-xs font-bold"
+            className="px-4 py-2 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-xl text-xs font-bold text-center flex-1 sm:flex-initial"
           >
             Export Reports (CSV)
           </Link>
@@ -102,18 +102,18 @@ const AdminDashboard = () => {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         {/* Total Bookings */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
             Total Bookings
           </span>
-          <span className="text-2xl font-extrabold text-slate-900 block">{kpis.totalBookings || 0}</span>
+          <span className="text-xl sm:text-2xl font-extrabold text-slate-900 block">{kpis.totalBookings || 0}</span>
           <span className="text-[10px] text-slate-400 block">All orders</span>
         </div>
 
         {/* Pending Requests */}
-        <div className="bg-white p-5 rounded-2xl border border-amber-200 bg-amber-50/20 shadow-2xs space-y-1">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-amber-200 bg-amber-50/20 shadow-2xs space-y-1">
           <div className="flex justify-between items-center">
             <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider">
               Pending Requests
@@ -122,43 +122,43 @@ const AdminDashboard = () => {
               <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
             )}
           </div>
-          <span className="text-2xl font-extrabold text-amber-700 block">{kpis.pendingRequests || 0}</span>
+          <span className="text-xl sm:text-2xl font-extrabold text-amber-700 block">{kpis.pendingRequests || 0}</span>
           <span className="text-[10px] text-amber-600 block">Requires action</span>
         </div>
 
         {/* Completed Acres */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
             Acres Worked
           </span>
-          <span className="text-2xl font-extrabold text-brand-700 block">{kpis.completedAcres || 0}</span>
+          <span className="text-xl sm:text-2xl font-extrabold text-brand-700 block">{kpis.completedAcres || 0}</span>
           <span className="text-[10px] text-slate-400 block">Cultivated / Sown</span>
         </div>
 
         {/* Total Revenue */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
             Revenue Paid
           </span>
-          <span className="text-2xl font-extrabold text-emerald-700 block">{formatINR(kpis.totalRevenue || 0)}</span>
+          <span className="text-xl sm:text-2xl font-extrabold text-emerald-700 block">{formatINR(kpis.totalRevenue || 0)}</span>
           <span className="text-[10px] text-slate-400 block">Cash + UPI Collected</span>
         </div>
 
         {/* Total Expenses */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
             Expenses
           </span>
-          <span className="text-2xl font-extrabold text-red-600 block">{formatINR(kpis.totalExpenses || 0)}</span>
+          <span className="text-xl sm:text-2xl font-extrabold text-red-600 block">{formatINR(kpis.totalExpenses || 0)}</span>
           <span className="text-[10px] text-slate-400 block">Diesel, Maintenance, Labour</span>
         </div>
 
         {/* Net Profit */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
             Net Profit
           </span>
-          <span className={`text-2xl font-extrabold block ${kpis.netProfit >= 0 ? 'text-emerald-800' : 'text-red-700'}`}>
+          <span className={`text-xl sm:text-2xl font-extrabold block ${kpis.netProfit >= 0 ? 'text-emerald-800' : 'text-red-700'}`}>
             {formatINR(kpis.netProfit || 0)}
           </span>
           <span className="text-[10px] text-slate-400 block">Revenue &minus; Expenses</span>
@@ -167,7 +167,7 @@ const AdminDashboard = () => {
 
       {/* Pending Requests Quick Action Box */}
       {recentPending.length > 0 && (
-        <div className="bg-white rounded-3xl p-6 border border-amber-200 shadow-xs space-y-4">
+        <div className="bg-white rounded-3xl p-4 sm:p-6 border border-amber-200 shadow-xs space-y-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
@@ -180,8 +180,8 @@ const AdminDashboard = () => {
             </Link>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs text-left">
+          <div className="table-responsive-wrapper">
+            <table className="w-full text-xs text-left min-w-[620px]">
               <thead>
                 <tr className="border-b border-slate-200 text-slate-400 font-semibold uppercase tracking-wider">
                   <th className="py-2">Farmer</th>

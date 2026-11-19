@@ -67,7 +67,7 @@ const Services = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-4 bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-xs">
         {/* Category pills */}
         <div className="flex flex-wrap gap-1.5 w-full sm:w-auto">
           {categories.map((cat) => (
@@ -95,16 +95,16 @@ const Services = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search service..."
-            className="block w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500"
+            className="block w-full pl-9 pr-3 py-2 sm:py-1.5 text-base sm:text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
       </div>
 
       {/* Services Grid */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 border border-slate-200 animate-pulse space-y-4">
+            <div key={i} className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 animate-pulse space-y-4">
               <div className="h-6 bg-slate-200 rounded w-2/3"></div>
               <div className="h-12 bg-slate-100 rounded w-full"></div>
               <div className="h-8 bg-slate-200 rounded w-1/3"></div>
@@ -126,23 +126,23 @@ const Services = () => {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredServices.map((service) => (
             <div
               key={service._id}
-              className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+              className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                  <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
                     {service.category}
                   </span>
-                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                  <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
                     Active
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-slate-900 mt-2">{service.name}</h3>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-2">{service.name}</h3>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                   {service.description}
                 </p>
@@ -156,11 +156,11 @@ const Services = () => {
 
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                 <div>
-                  <span className="text-xs text-slate-500 block">Current Price (दर)</span>
-                  <span className="text-xl font-extrabold text-slate-900">
+                  <span className="text-[11px] text-slate-500 block">Current Price (दर)</span>
+                  <span className="text-lg sm:text-xl font-extrabold text-slate-900">
                     {formatINR(service.currentPrice)}
                   </span>
-                  <span className="text-xs text-slate-500 block">
+                  <span className="text-[11px] text-slate-500 block">
                     {formatUnit(service.pricingUnit)}
                   </span>
                 </div>
@@ -168,10 +168,10 @@ const Services = () => {
                 <Link
                   to="/customer/book"
                   state={{ preselectedServiceId: service._id }}
-                  className="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold shadow-xs transition-all"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold shadow-xs transition-all min-h-[40px]"
                 >
                   <span>Book Now</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
                 </Link>
               </div>
             </div>

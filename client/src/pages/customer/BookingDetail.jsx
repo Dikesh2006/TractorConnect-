@@ -85,7 +85,7 @@ const BookingDetail = () => {
   const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
       {/* Top back button & title */}
       <div className="flex items-center space-x-3">
         <Link
@@ -103,7 +103,7 @@ const BookingDetail = () => {
       </div>
 
       {/* Overview Card */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-5 sm:space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-6">
           <div>
             <span className="text-xs text-slate-500 block">Booking Status (स्थिति)</span>
@@ -146,7 +146,7 @@ const BookingDetail = () => {
       </div>
 
       {/* Field Location with Map */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-base font-bold text-slate-900 flex items-center space-x-2">
             <MapPin className="w-4 h-4 text-brand-700" />
@@ -182,7 +182,7 @@ const BookingDetail = () => {
 
       {/* Assigned Tractor Info (if scheduled) */}
       {booking.assignedTractor && (
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-3">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-3">
           <h2 className="text-base font-bold text-slate-900 flex items-center space-x-2">
             <Truck className="w-4 h-4 text-brand-700" />
             <span>Assigned Tractor & Driver Details</span>
@@ -207,7 +207,7 @@ const BookingDetail = () => {
 
       {/* Completed Work Record (if completed) */}
       {workRecord && (
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-emerald-200 shadow-xs space-y-6">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-emerald-200 shadow-xs space-y-5 sm:space-y-6">
           <div className="flex justify-between items-center">
             <h2 className="text-lg font-bold text-slate-900 flex items-center space-x-2">
               <FileCheck2 className="w-5 h-5 text-emerald-600" />
@@ -218,7 +218,7 @@ const BookingDetail = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
             <div>
               <span className="text-slate-400 block">Actual Quantity Worked</span>
               <strong className="text-base font-extrabold text-slate-900">
@@ -275,7 +275,7 @@ const BookingDetail = () => {
       )}
 
       {/* Status History Timeline */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-slate-200 shadow-xs space-y-4">
         <h2 className="text-base font-bold text-slate-900">Order Progress Timeline</h2>
         <div className="border-l-2 border-brand-200 pl-4 space-y-4 text-xs">
           {booking.statusHistory?.map((h, idx) => (

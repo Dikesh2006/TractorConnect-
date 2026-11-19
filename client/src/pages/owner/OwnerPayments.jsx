@@ -145,8 +145,8 @@ const OwnerPayments = () => {
             No payments recorded yet.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700">
+          <div className="table-responsive-wrapper">
+            <table className="w-full text-left text-xs text-slate-700 min-w-[650px]">
               <thead className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[10px] border-b border-slate-200">
                 <tr>
                   <th className="py-3 px-4">Date & Time</th>

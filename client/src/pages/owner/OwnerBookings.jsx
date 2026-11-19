@@ -494,7 +494,7 @@ const OwnerBookings = () => {
                   required
                   value={scheduleForm.tractorId}
                   onChange={(e) => setScheduleForm({ ...scheduleForm, tractorId: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="">-- Choose Tractor --</option>
                   {tractors.map((t) => (
@@ -505,7 +505,7 @@ const OwnerBookings = () => {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Start Date & Time *
@@ -515,7 +515,7 @@ const OwnerBookings = () => {
                     required
                     value={scheduleForm.scheduledStart}
                     onChange={(e) => setScheduleForm({ ...scheduleForm, scheduledStart: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
@@ -528,7 +528,7 @@ const OwnerBookings = () => {
                     required
                     value={scheduleForm.scheduledEnd}
                     onChange={(e) => setScheduleForm({ ...scheduleForm, scheduledEnd: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
@@ -542,22 +542,22 @@ const OwnerBookings = () => {
                   placeholder="e.g. Mukesh Yadav"
                   value={scheduleForm.operatorName}
                   onChange={(e) => setScheduleForm({ ...scheduleForm, operatorName: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
-              <div className="flex justify-end space-x-2 pt-2 border-t">
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 pt-2 border-t">
                 <button
                   type="button"
                   onClick={() => setScheduleModalOpen(false)}
-                  className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-xl"
+                  className="px-3 py-2 text-xs text-slate-600 hover:bg-slate-100 rounded-xl w-full sm:w-auto text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={!scheduleForm.tractorId}
-                  className="px-4 py-1.5 text-xs bg-blue-600 text-white font-bold hover:bg-blue-700 rounded-xl shadow-xs disabled:opacity-50"
+                  className="px-4 py-2 text-xs bg-blue-600 text-white font-bold hover:bg-blue-700 rounded-xl shadow-xs disabled:opacity-50 w-full sm:w-auto text-center cursor-pointer min-h-[40px]"
                 >
                   Confirm Schedule
                 </button>
@@ -581,7 +581,7 @@ const OwnerBookings = () => {
             </p>
 
             <form onSubmit={handleCompleteWork} className="space-y-4" noValidate>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Actual Quantity ({activeBooking.serviceSnapshot?.pricingUnit?.replace('per_', '')}) *
@@ -593,7 +593,7 @@ const OwnerBookings = () => {
                     required
                     value={completeForm.actualQuantity}
                     onChange={(e) => setCompleteForm({ ...completeForm, actualQuantity: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 font-bold"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500 font-bold"
                   />
                 </div>
 
@@ -608,7 +608,7 @@ const OwnerBookings = () => {
                     placeholder="e.g. 12.5"
                     value={completeForm.dieselUsedLiters}
                     onChange={(e) => setCompleteForm({ ...completeForm, dieselUsedLiters: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500"
                   />
                 </div>
               </div>
@@ -622,7 +622,7 @@ const OwnerBookings = () => {
                   placeholder="e.g. Mukesh Yadav"
                   value={completeForm.operatorName}
                   onChange={(e) => setCompleteForm({ ...completeForm, operatorName: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500"
+                  className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500"
                 />
               </div>
 
@@ -635,7 +635,7 @@ const OwnerBookings = () => {
                   placeholder="e.g. 5 acres double ploughing completed smoothly."
                   value={completeForm.notes}
                   onChange={(e) => setCompleteForm({ ...completeForm, notes: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500"
+                  className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-500"
                 />
               </div>
 
@@ -648,18 +648,18 @@ const OwnerBookings = () => {
                 </span>
               </div>
 
-              <div className="flex justify-end space-x-2 pt-2 border-t">
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 pt-2 border-t">
                 <button
                   type="button"
                   onClick={() => setCompleteModalOpen(false)}
-                  className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-xl"
+                  className="px-3 py-2 text-xs text-slate-600 hover:bg-slate-100 rounded-xl w-full sm:w-auto text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={!completeForm.actualQuantity}
-                  className="px-4 py-1.5 text-xs bg-brand-700 text-white font-bold hover:bg-brand-800 rounded-xl shadow-xs disabled:opacity-50"
+                  className="px-4 py-2 text-xs bg-brand-700 text-white font-bold hover:bg-brand-800 rounded-xl shadow-xs disabled:opacity-50 w-full sm:w-auto text-center cursor-pointer min-h-[40px]"
                 >
                   Generate Work Record
                 </button>

@@ -120,8 +120,8 @@ const OwnerRegister = () => {
   };
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-slate-100 flex items-center justify-center">
-      <div className="max-w-2xl w-full bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+    <div className="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-slate-100 flex items-center justify-center">
+      <div className="max-w-2xl w-full bg-white p-5 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-slate-200 space-y-6">
         {/* Toggle between Farmer and Owner */}
         <div className="flex bg-slate-100 p-1 rounded-xl max-w-sm mx-auto">
           <Link

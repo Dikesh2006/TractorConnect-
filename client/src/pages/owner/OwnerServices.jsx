@@ -317,11 +317,11 @@ const OwnerServices = () => {
                   placeholder="e.g. Deep Ploughing (गहरी जुताई)"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
+                  className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Category (श्रेणी) *
@@ -329,7 +329,7 @@ const OwnerServices = () => {
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
                   >
                     {CATEGORIES.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -344,7 +344,7 @@ const OwnerServices = () => {
                   <select
                     value={formData.pricingUnit}
                     onChange={(e) => setFormData({ ...formData, pricingUnit: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
                   >
                     {PRICING_UNITS.map((u) => (
                       <option key={u.value} value={u.value}>{u.label}</option>
@@ -353,7 +353,7 @@ const OwnerServices = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Price per Unit (₹ दर) *
@@ -365,7 +365,7 @@ const OwnerServices = () => {
                     placeholder="e.g. 850"
                     value={formData.currentPrice}
                     onChange={(e) => setFormData({ ...formData, currentPrice: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 font-semibold"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 font-semibold"
                   />
                 </div>
 
@@ -379,7 +379,7 @@ const OwnerServices = () => {
                     placeholder="e.g. 500"
                     value={formData.minimumCharge}
                     onChange={(e) => setFormData({ ...formData, minimumCharge: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
                   />
                 </div>
               </div>
@@ -393,7 +393,7 @@ const OwnerServices = () => {
                   placeholder="e.g. Done with heavy double disc MB plough for superior soil pulverization."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
+                  className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 
@@ -407,23 +407,23 @@ const OwnerServices = () => {
                     placeholder="e.g. Kharif season opening revision"
                     value={formData.priceChangeNote}
                     onChange={(e) => setFormData({ ...formData, priceChangeNote: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
+                    className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500"
                   />
                 </div>
               )}
 
-              <div className="flex justify-end space-x-2 pt-3 border-t">
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 pt-3 border-t">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-600 font-semibold hover:bg-slate-100 rounded-xl"
+                  className="px-4 py-2.5 text-xs text-slate-600 font-semibold hover:bg-slate-100 rounded-xl w-full sm:w-auto text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs disabled:opacity-50"
+                  className="px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs disabled:opacity-50 w-full sm:w-auto text-center cursor-pointer min-h-[40px]"
                 >
                   {submitting ? 'Saving...' : editingService ? 'Update Service' : 'Create Service'}
                 </button>

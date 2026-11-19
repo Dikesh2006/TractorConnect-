@@ -99,7 +99,7 @@ const MyBookings = () => {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap gap-2 border-b border-slate-200 pb-3">
+      <div className="flex overflow-x-auto pb-2 sm:flex-wrap gap-1.5 border-b border-slate-200 custom-scrollbar">
         {[
           { label: 'All', value: '' },
           { label: 'Pending', value: 'pending' },
@@ -112,7 +112,7 @@ const MyBookings = () => {
           <button
             key={tab.value}
             onClick={() => setStatusFilter(tab.value)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
               statusFilter === tab.value
                 ? 'bg-slate-900 text-white'
                 : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
@@ -146,19 +146,19 @@ const MyBookings = () => {
           {bookings.map((booking) => (
             <div
               key={booking._id}
-              className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-slate-300 transition-all"
+              className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-slate-300 transition-all"
             >
-              <div className="space-y-2">
-                <div className="flex items-center space-x-3">
-                  <span className="text-base font-bold text-slate-900">{booking.service?.name}</span>
+              <div className="space-y-2 w-full md:w-auto">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm sm:text-base font-bold text-slate-900">{booking.service?.name}</span>
                   {getStatusBadge(booking.status)}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600">
+                <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 text-xs text-slate-600">
                   <span>Date: <strong>{formatISTDate(booking.requestedDate, false)}</strong> ({booking.requestedTimeSlot})</span>
                   <span>Quantity: <strong>{booking.estimatedQuantity} {booking.serviceSnapshot?.pricingUnit}</strong></span>
                   <span className="flex items-center space-x-1">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                    <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
                     <span>{booking.fieldLocation?.village}, {booking.fieldLocation?.district}</span>
                   </span>
                   {booking.assignedTractor && (
@@ -169,31 +169,33 @@ const MyBookings = () => {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-4 self-end md:self-center">
-                <div className="text-right">
+              <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 w-full md:w-auto pt-3 border-t border-slate-100 md:border-t-0 md:pt-0">
+                <div className="text-left md:text-right">
                   <span className="text-[11px] text-slate-500 block">Est. Cost</span>
                   <span className="text-base font-extrabold text-slate-900">
                     {formatINR(booking.estimatedCost)}
                   </span>
                 </div>
 
-                {['pending', 'accepted', 'scheduled'].includes(booking.status) && (
-                  <button
-                    type="button"
-                    onClick={() => handleCancelClick(booking._id)}
-                    className="px-3 py-1.5 rounded-xl border border-red-200 text-red-700 hover:bg-red-50 text-xs font-semibold"
-                  >
-                    Cancel
-                  </button>
-                )}
+                <div className="flex items-center space-x-2">
+                  {['pending', 'accepted', 'scheduled'].includes(booking.status) && (
+                    <button
+                      type="button"
+                      onClick={() => handleCancelClick(booking._id)}
+                      className="px-3 py-2 rounded-xl border border-red-200 text-red-700 hover:bg-red-50 text-xs font-semibold min-h-[38px]"
+                    >
+                      Cancel
+                    </button>
+                  )}
 
-                <Link
-                  to={`/customer/bookings/${booking._id}`}
-                  className="inline-flex items-center space-x-1 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold"
-                >
-                  <span>Details</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                  <Link
+                    to={`/customer/bookings/${booking._id}`}
+                    className="inline-flex items-center space-x-1 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold min-h-[38px]"
+                  >
+                    <span>Details</span>
+                    <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
@@ -202,10 +204,10 @@ const MyBookings = () => {
 
       {/* Cancel Confirmation Modal */}
       {cancelModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">
-          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-4 shadow-xl">
-            <h3 className="text-lg font-bold text-slate-900">Cancel Tractor Booking</h3>
-            <p className="text-xs text-slate-600">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
+          <div className="bg-white rounded-3xl p-5 sm:p-8 max-w-md w-full space-y-4 shadow-xl">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900">Cancel Tractor Booking</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
               Are you sure you want to cancel this booking? Please share why you are cancelling.
             </p>
 
@@ -233,14 +235,14 @@ const MyBookings = () => {
               <button
                 type="button"
                 onClick={() => setCancelModalOpen(false)}
-                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl"
+                className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl min-h-[40px]"
               >
                 Keep Booking
               </button>
               <button
                 type="button"
                 onClick={handleConfirmCancel}
-                className="px-4 py-2 text-xs font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl shadow-xs"
+                className="px-4 py-2.5 text-xs font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl shadow-xs min-h-[40px]"
               >
                 Confirm Cancel
               </button>
