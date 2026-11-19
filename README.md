@@ -302,7 +302,17 @@ npm run test:client
 - `src/tests/auth.test.jsx`: **4 passed** (form validation & error states)
 - `src/tests/App.test.jsx`: **1 passed** (app rendering & routing)
 
----
 
-## 8. License
-Proprietary software developed for TractorConnect agricultural marketplace platform. All rights reserved.
+
+## 8. Developer Information
+
+**Developed By:** Dikesh Choure
+
+**Role:** Full Stack Developer
+
+**Technology Stack:** MERN (MongoDB, Express.js, React.js, Node.js)
+
+**Project:** TractorConnect – Multi-Owner Tractor & Farming Services Marketplace
+
+**LinkedIn:** https://www.linkedin.com/in/dikesh-choure-242b21301/
+
