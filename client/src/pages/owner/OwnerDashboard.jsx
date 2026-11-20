@@ -205,15 +205,14 @@ const OwnerDashboard = () => {
 
                   <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start space-x-2 sm:space-x-0 space-y-0 sm:space-y-1">
                     <span
-                      className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                        b.status === 'pending'
-                          ? 'bg-amber-100 text-amber-800'
-                          : b.status === 'scheduled'
+                      className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${b.status === 'pending'
+                        ? 'bg-amber-100 text-amber-800'
+                        : b.status === 'scheduled'
                           ? 'bg-blue-100 text-blue-800'
                           : b.status === 'completed'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-slate-100 text-slate-700'
-                      }`}
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : 'bg-slate-100 text-slate-700'
+                        }`}
                     >
                       {b.status}
                     </span>
@@ -253,13 +252,12 @@ const OwnerDashboard = () => {
                       </p>
                     </div>
                     <span
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                        t.status === 'available'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : t.status === 'in_use'
+                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${t.status === 'available'
+                        ? 'bg-emerald-100 text-emerald-800'
+                        : t.status === 'in_use'
                           ? 'bg-blue-100 text-blue-800'
                           : 'bg-amber-100 text-amber-800'
-                      }`}
+                        }`}
                     >
                       {t.status}
                     </span>
