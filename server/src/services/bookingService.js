@@ -51,6 +51,9 @@ const createBooking = async (customerId, data) => {
   // Determine tractor owner for this booking
   const User = mongoose.model('User');
   let targetOwnerId = data.ownerId || service.owner;
+  if (typeof targetOwnerId === 'object' && targetOwnerId !== null && targetOwnerId._id) {
+    targetOwnerId = targetOwnerId._id;
+  }
   if (!targetOwnerId) {
     const defaultAdmin = await User.findOne({ role: 'admin' });
     targetOwnerId = defaultAdmin ? defaultAdmin._id : null;

@@ -14,7 +14,12 @@ const fieldLocationSchema = z.object({
 
 const createBookingSchema = z.object({
   serviceId: z.string({ required_error: 'Service ID is required' }).min(1),
-  ownerId: z.string().optional(),
+  ownerId: z
+    .union([
+      z.string(),
+      z.object({ _id: z.any() }).transform((val) => (val._id ? String(val._id) : undefined))
+    ])
+    .optional(),
   estimatedQuantity: z
     .number({ required_error: 'Estimated quantity (acres/hours) is required' })
     .positive('Quantity must be greater than zero')

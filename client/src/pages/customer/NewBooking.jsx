@@ -39,7 +39,11 @@ const NewBooking = () => {
 
   const preselectedId = location.state?.preselectedServiceId || '';
   const preselectedOwner = location.state?.preselectedOwner || null;
-  const preselectedOwnerId = location.state?.preselectedOwnerId || preselectedOwner?._id || '';
+  const rawPreselectedOwnerId = location.state?.preselectedOwnerId || preselectedOwner?._id || '';
+  const preselectedOwnerId =
+    typeof rawPreselectedOwnerId === 'object' && rawPreselectedOwnerId !== null
+      ? String(rawPreselectedOwnerId._id || '')
+      : String(rawPreselectedOwnerId || '');
 
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
@@ -100,10 +104,16 @@ const NewBooking = () => {
             if (match) {
               setSelectedService(match);
               setValue('serviceId', match._id);
+              if (!selectedOwner && match.owner) {
+                setSelectedOwner(typeof match.owner === 'object' ? match.owner : null);
+              }
             }
           } else if (fetched.length > 0) {
             setSelectedService(fetched[0]);
             setValue('serviceId', fetched[0]._id);
+            if (!selectedOwner && fetched[0].owner) {
+              setSelectedOwner(typeof fetched[0].owner === 'object' ? fetched[0].owner : null);
+            }
           }
         }
       } catch (err) {
@@ -114,15 +124,20 @@ const NewBooking = () => {
     };
 
     fetchServices();
-  }, [preselectedId, setValue]);
+  }, [preselectedId, setValue, selectedOwner]);
 
   // Update selected service state when dropdown changes
   useEffect(() => {
     if (watchedServiceId && services.length > 0) {
       const match = services.find((s) => s._id === watchedServiceId);
-      if (match) setSelectedService(match);
+      if (match) {
+        setSelectedService(match);
+        if (!preselectedOwner && match.owner) {
+          setSelectedOwner(typeof match.owner === 'object' ? match.owner : null);
+        }
+      }
     }
-  }, [watchedServiceId, services]);
+  }, [watchedServiceId, services, preselectedOwner]);
 
   // Dynamic cost calculation preview
   const calculateCostPreview = () => {
@@ -144,10 +159,31 @@ const NewBooking = () => {
     try {
       setApiError('');
       setIsSubmitting(true);
-      const targetOwnerId = preselectedOwnerId || selectedOwner?._id || selectedService?.owner;
+
+      // Determine the target tractor owner ID strictly as a string
+      let rawTargetOwner;
+      if (preselectedOwnerId) {
+        rawTargetOwner = preselectedOwnerId;
+      } else if (selectedOwner) {
+        rawTargetOwner = selectedOwner;
+      } else if (selectedService?.owner) {
+        rawTargetOwner = selectedService.owner;
+      }
+
+      let targetOwnerId;
+      if (rawTargetOwner) {
+        if (typeof rawTargetOwner === 'object' && rawTargetOwner !== null) {
+          targetOwnerId = rawTargetOwner._id ? String(rawTargetOwner._id) : undefined;
+        } else {
+          targetOwnerId = String(rawTargetOwner);
+        }
+      }
+
+      const cleanOwnerId = targetOwnerId ? targetOwnerId.trim() : undefined;
+
       const payload = {
         ...data,
-        ownerId: targetOwnerId || undefined
+        ownerId: cleanOwnerId || undefined
       };
       const res = await apiClient.post('/bookings', payload);
       if (res.data?.success) {

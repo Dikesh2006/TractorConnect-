@@ -287,5 +287,137 @@ describe('Booking Lifecycle, Pricing Snapshot & Tractor Scheduling', () => {
     const b = await Booking.findById(bId);
     expect(b.status).toBe('completed');
   });
+
+  it('correctly saves booking in MongoDB with assigned tractor owner, visible in farmer history and owner dashboard', async () => {
+    // 1. Create an approved tractor owner
+    const owner = new User({
+      name: 'Kailash Patel',
+      mobile: '9826077777',
+      passwordHash: 'Owner@123',
+      role: 'owner',
+      businessName: 'Kailash Tractor Works',
+      village: 'Shyampur',
+      district: 'Sehore',
+      isApproved: true,
+      approvalStatus: 'approved',
+      isActive: true
+    });
+    await owner.save();
+
+    const ownerLogin = await request(app).post('/api/v1/auth/login').send({
+      mobile: '9826077777',
+      password: 'Owner@123'
+    });
+    const ownerToken = ownerLogin.body.data.token;
+
+    // Create a second owner for isolation test
+    const otherOwner = new User({
+      name: 'Dinesh Verma',
+      mobile: '9826088888',
+      passwordHash: 'Owner@123',
+      role: 'owner',
+      businessName: 'Verma Farm Solutions',
+      village: 'Ashta',
+      district: 'Sehore',
+      isApproved: true,
+      approvalStatus: 'approved',
+      isActive: true
+    });
+    await otherOwner.save();
+
+    const otherOwnerLogin = await request(app).post('/api/v1/auth/login').send({
+      mobile: '9826088888',
+      password: 'Owner@123'
+    });
+    const otherOwnerToken = otherOwnerLogin.body.data.token;
+
+    // 2. Farmer books service by sending ownerId as a string
+    const bookRes = await request(app)
+      .post('/api/v1/bookings')
+      .set('Authorization', `Bearer ${customerToken}`)
+      .send({
+        serviceId: service._id.toString(),
+        ownerId: owner._id.toString(),
+        estimatedQuantity: 6,
+        requestedDate: '2026-11-25',
+        requestedTimeSlot: 'morning',
+        fieldLocation: {
+          village: 'Shyampur',
+          district: 'Sehore'
+        },
+        customerNotes: 'Need deep tilling'
+      });
+
+    expect(bookRes.status).toBe(201);
+    expect(bookRes.body.success).toBe(true);
+    const newBookingId = bookRes.body.data.booking._id;
+
+    // 3. Confirm booking is successfully saved in MongoDB
+    const savedBooking = await Booking.findById(newBookingId);
+    expect(savedBooking).not.toBeNull();
+    expect(savedBooking.tractorOwner.toString()).toBe(owner._id.toString());
+    expect(savedBooking.customer.toString()).toBe(customerUser._id ? customerUser._id.toString() : customerUser.id);
+    expect(savedBooking.estimatedQuantity).toBe(6);
+
+    // 4. Confirm visible in farmer's booking history
+    const farmerHistoryRes = await request(app)
+      .get('/api/v1/bookings/my')
+      .set('Authorization', `Bearer ${customerToken}`);
+
+    expect(farmerHistoryRes.status).toBe(200);
+    expect(farmerHistoryRes.body.success).toBe(true);
+    const farmerBookingIds = farmerHistoryRes.body.data.bookings.map((b) => b._id.toString());
+    expect(farmerBookingIds).toContain(newBookingId.toString());
+
+    // 5. Confirm visible in the correct owner's dashboard (/owner/all)
+    const ownerDashboardRes = await request(app)
+      .get('/api/v1/bookings/owner/all')
+      .set('Authorization', `Bearer ${ownerToken}`);
+
+    expect(ownerDashboardRes.status).toBe(200);
+    expect(ownerDashboardRes.body.success).toBe(true);
+    const ownerBookingIds = ownerDashboardRes.body.data.bookings.map((b) => b._id.toString());
+    expect(ownerBookingIds).toContain(newBookingId.toString());
+
+    // 6. Confirm NOT visible in the other owner's dashboard (data isolation)
+    const otherDashboardRes = await request(app)
+      .get('/api/v1/bookings/owner/all')
+      .set('Authorization', `Bearer ${otherOwnerToken}`);
+
+    expect(otherDashboardRes.status).toBe(200);
+    const otherBookingIds = otherDashboardRes.body.data.bookings.map((b) => b._id.toString());
+    expect(otherBookingIds).not.toContain(newBookingId.toString());
+  });
+
+  it('accepts ownerId when sent as an object {_id: ...} from client, normalizing and validating correctly', async () => {
+    const owner = new User({
+      name: 'Kamal Sharma',
+      mobile: '9826099999',
+      passwordHash: 'Owner@123',
+      role: 'owner',
+      businessName: 'Sharma Tractors',
+      village: 'Bilkisganj',
+      district: 'Sehore',
+      isApproved: true,
+      approvalStatus: 'approved',
+      isActive: true
+    });
+    await owner.save();
+
+    const bookRes = await request(app)
+      .post('/api/v1/bookings')
+      .set('Authorization', `Bearer ${customerToken}`)
+      .send({
+        serviceId: service._id.toString(),
+        ownerId: { _id: owner._id.toString(), name: owner.name },
+        estimatedQuantity: 3,
+        requestedDate: '2026-11-26',
+        fieldLocation: { village: 'Bilkisganj', district: 'Sehore' }
+      });
+
+    expect(bookRes.status).toBe(201);
+    expect(bookRes.body.success).toBe(true);
+    expect(bookRes.body.data.booking.tractorOwner._id).toBe(owner._id.toString());
+  });
 });
 

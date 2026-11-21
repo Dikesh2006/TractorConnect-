@@ -47,5 +47,20 @@ describe('Booking Cost Calculation & Indian Formatters', () => {
     expect(normalizeIndianMobile('+91 98260 11111')).toBe('9826011111');
     expect(normalizeIndianMobile('09826011111')).toBe('9826011111');
   });
+
+  it('correctly normalizes ownerId to string when provided as object or string', () => {
+    const extractOwnerId = (val) => {
+      if (!val) return undefined;
+      if (typeof val === 'object' && val !== null) {
+        return val._id ? String(val._id) : undefined;
+      }
+      return String(val).trim() || undefined;
+    };
+
+    expect(extractOwnerId({ _id: '673a5f1234567890abcdef12', name: 'Ramesh' })).toBe('673a5f1234567890abcdef12');
+    expect(extractOwnerId('673a5f1234567890abcdef12')).toBe('673a5f1234567890abcdef12');
+    expect(extractOwnerId(null)).toBeUndefined();
+    expect(extractOwnerId(undefined)).toBeUndefined();
+  });
 });
 
