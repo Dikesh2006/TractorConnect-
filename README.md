@@ -7,7 +7,7 @@
 [![React](https://img.shields.io/badge/React-18.3-blue)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-6.0-purple)](https://vitejs.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)](https://tailwindcss.com)
-[![Tests Passing](https://img.shields.io/badge/Tests-72%2F72%20Passed-success)](npm%20run%20test:all)
+[![Tests Passing](https://img.shields.io/badge/Tests-75%2F75%20Passed-success)](npm%20run%20test:all)
 
 ---
 
@@ -280,26 +280,26 @@ The seed script (`server/src/seed/seed.js`) provisions the following verified ac
 
 ---
 
-## 7. Automated Test Suites (72/72 Passing)
+## 7. Automated Test Suites (75/75 Passing)
 
-### Backend Tests (58 tests across 6 suites)
+### Backend Tests (60 tests across 6 suites)
 ```bash
 npm run test
 ```
 - `src/tests/multiOwner.test.js`: **18 passed** (separate registration, admin approvals, owner services, discovery, routing, overlap checks, cross-owner 403 isolation)
 - `src/tests/auth.test.js`: **14 passed** (registration, login, profile, password change, RBAC)
 - `src/tests/foundation.test.js`: **9 passed** (health, 404, Indian context formatters, CSV sanitization)
+- `src/tests/bookingLifecycle.test.js`: **7 passed** (price snapshot immutability, state machine, work record creation, end-to-end multi-owner routing & ownerId unwrap verification)
 - `src/tests/paymentExpenseReport.test.js`: **7 passed** (Cash/UPI tracking, overpayment prevention, void audit, CSV export)
-- `src/tests/bookingLifecycle.test.js`: **5 passed** (price snapshot immutability, state machine, work record creation)
 - `src/tests/service.test.js`: **5 passed** (service CRUD, price history audit, slug generation)
 
-### Frontend Tests (14 tests across 4 suites)
+### Frontend Tests (15 tests across 4 suites)
 ```bash
 npm run test:client
 ```
-- `src/tests/multiOwnerFrontend.test.jsx`: **3 passed** (owner login, owner registration with depot & radius, nearby discovery & contractor comparison)
-- `src/tests/bookingEstimate.test.jsx`: **6 passed** (live cost calculation & INR formatting)
+- `src/tests/bookingEstimate.test.jsx`: **7 passed** (live cost calculation, INR formatting, ownerId string normalization)
 - `src/tests/auth.test.jsx`: **4 passed** (form validation & error states)
+- `src/tests/multiOwnerFrontend.test.jsx`: **3 passed** (owner login, owner registration with depot & radius, nearby discovery & contractor comparison)
 - `src/tests/App.test.jsx`: **1 passed** (app rendering & routing)
 
 
